@@ -1,22 +1,14 @@
 import {
   ChakraProvider,
-  Box,
-  Text,
-  Link,
-  VStack,
-  Code,
-  Grid,
   theme,
 } from "@chakra-ui/react"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import LoginPage from "./routes/Login";
 import Dashboard from "./routes/Dashboard";
-import { Table } from "./components/Table/Table";
+import { Table } from "./components/table/Table";
 
 const router = createBrowserRouter([
   {
@@ -24,16 +16,20 @@ const router = createBrowserRouter([
     element: <Dashboard children={undefined} />,
   },
   {
-    path: "/x",
-    element: <Dashboard children={<p>Youareasdasd</p>} />,
+    path: "/users",
+    element: <Dashboard children={<Table />} />,
   },
   {
-    path: "/tables",
+    path: "/datasets",
     element: <Dashboard children={<Table />} />,
   },
   {
     path: "/login",
     element: <LoginPage />
+  },
+  {
+    path: "*",
+    element: <Dashboard children={<p>Error 404: Page not found</p>} />
   }
 ]);
 

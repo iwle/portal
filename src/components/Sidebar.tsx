@@ -11,8 +11,8 @@ import {
 } from '@chakra-ui/react';
 import {
     FiHome,
-    FiTrendingUp,
-    FiCompass,
+    FiLayers,
+    FiUser,
     FiStar,
     FiSettings,
 } from 'react-icons/fi';
@@ -26,8 +26,8 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
     { name: 'Home', icon: FiHome, href: '/' },
-    { name: 'Tables', icon: FiTrendingUp, href: '/tables' },
-    { name: 'Permissions', icon: FiCompass, href: '/x' },
+    { name: 'Users', icon: FiUser, href: '/users' },
+    { name: 'Datasets', icon: FiLayers, href: '/datasets' },
     { name: 'Favourites', icon: FiStar, href: '/' },
     { name: 'Settings', icon: FiSettings, href: '/' },
 ];
