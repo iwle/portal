@@ -56,7 +56,7 @@ export default function BasicStatistics() {
                 fontSize={'4xl'}
                 py={10}
                 fontWeight={'bold'}>
-                Welcome to the Data Governance Portal
+                tealData Governance Portal
             </chakra.h1>
             <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
                 <StatsCard

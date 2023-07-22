@@ -11,6 +11,7 @@ import Dashboard from "./routes/Dashboard";
 import { DatasetsTable } from "./components/table/Datasets";
 import { UsersTable } from "./components/table/Users";
 import Home from "./components/landing-page/Home";
+import Test from "./components/test/Test";
 const theme = extendTheme({
 })
 
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/settings",
-    element: <Dashboard selected="Settings" children={<></>} />
+    element: <Dashboard selected="Settings" children={<Test />} />
   },
   {
     path: "/login",
