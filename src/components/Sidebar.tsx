@@ -28,12 +28,13 @@ const LinkItems: Array<LinkItemProps> = [
     { name: 'Home', icon: FiHome, href: '/' },
     { name: 'Users', icon: FiUser, href: '/users' },
     { name: 'Datasets', icon: FiLayers, href: '/datasets' },
-    { name: 'Favourites', icon: FiStar, href: '/' },
-    { name: 'Settings', icon: FiSettings, href: '/' },
+    { name: 'Favorites', icon: FiStar, href: '/favorites' },
+    { name: 'Settings', icon: FiSettings, href: '/settings' },
 ];
 
 interface SidebarProps extends BoxProps {
     onClose: () => void;
+    selected: string;
 }
 
 export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
@@ -43,21 +44,32 @@ export const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
             bg={useColorModeValue('white', 'gray.900')}
             borderRight="1px"
             borderRightColor={useColorModeValue('gray.200', 'gray.700')}
+            paddingTop={"20px"}
             w={{ base: 'full', md: 60 }}
             pos="fixed"
             h="full"
             {...rest}>
-            <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
+            {/* <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
                 <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
                     Datagov
                 </Text>
                 <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
-            </Flex>
-            {LinkItems.map((link) => (
-                <NavItem key={link.name} icon={link.icon} href={link.href}>
-                    {link.name}
-                </NavItem>
-            ))}
+            </Flex> */}
+            {LinkItems.map((link) => {
+                if (rest.selected === link.name) {
+                    return (
+                        <NavItem key={link.name} icon={link.icon} href={link.href} selected={true}>
+                            {link.name}
+                        </NavItem>
+                    )
+                } else {
+                    return (
+                        <NavItem key={link.name} icon={link.icon} href={link.href} selected={false}>
+                            {link.name}
+                        </NavItem>
+                    );
+                }
+            })}
         </Box>
     );
 };
@@ -66,6 +78,7 @@ interface NavItemProps extends FlexProps {
     icon: IconType;
     href: string;
     children: ReactText;
+    selected?: boolean;
 }
 const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => {
     return (
@@ -77,8 +90,10 @@ const NavItem = ({ icon, children, href, ...rest }: NavItemProps) => {
                 borderRadius="lg"
                 role="group"
                 cursor="pointer"
+                background={rest.selected ? "teal" : "transparent"}
+                color={rest.selected ? "white" : "black"}
                 _hover={{
-                    bg: 'cyan.400',
+                    bg: 'teal.400',
                     color: 'white',
                 }}
                 {...rest}>

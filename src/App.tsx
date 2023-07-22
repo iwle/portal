@@ -12,31 +12,28 @@ import { DatasetsTable } from "./components/table/Datasets";
 import { UsersTable } from "./components/table/Users";
 import Home from "./components/landing-page/Home";
 const theme = extendTheme({
-  colors: {
-    brand: {
-      100: "#f7fafc",
-      // ...
-      900: "#1a202c",
-    },
-  },
 })
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard children={<Home />} />,
+    element: <Dashboard selected="Home" children={<Home />} />,
   },
   {
     path: "/users",
-    element: <Dashboard children={<UsersTable />} />,
+    element: <Dashboard selected="Users" children={<UsersTable />} />,
   },
   {
     path: "/datasets",
-    element: <Dashboard children={<DatasetsTable />} />,
+    element: <Dashboard selected="Datasets" children={<DatasetsTable />} />,
   },
   {
     path: "/favorites",
-    element: <Dashboard children={<></>} />
+    element: <Dashboard selected="Favorites" children={<></>} />
+  },
+  {
+    path: "/settings",
+    element: <Dashboard selected="Settings" children={<></>} />
   },
   {
     path: "/login",
@@ -44,7 +41,7 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <Dashboard children={<p>Error 404: Page not found</p>} />
+    element: <Dashboard selected="404" children={<p>Error 404: Page not found</p>} />
   }
 ]);
 

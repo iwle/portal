@@ -238,7 +238,7 @@ export const DatasetsTable = () => {
             select: {
                 renderHeaderCellSelect: () => (
                     <Checkbox
-                        colorScheme="cyan"
+                        colorScheme="teal"
                         isChecked={select.state.all}
                         isIndeterminate={!select.state.all && !select.state.none}
                         onChange={select.fns.onToggleAll}
@@ -246,7 +246,7 @@ export const DatasetsTable = () => {
                 ),
                 renderCellSelect: (item: { id: Identifier; }) => (
                     <Checkbox
-                        colorScheme="cyan"
+                        colorScheme="teal"
                         style={{ backgroundColor: '#ffffff' }}
                         isChecked={select.state.ids.includes(item.id)}
                         onChange={() => select.fns.onToggleById(item.id)}
@@ -283,7 +283,7 @@ export const DatasetsTable = () => {
                         icon={<FaPen />}
                         size="xs"
                         variant="ghost"
-                        colorScheme="cyan"
+                        colorScheme="teal"
                         onClick={() => setDrawerId(item.id)}
                     />
                 </div>
@@ -302,42 +302,42 @@ export const DatasetsTable = () => {
                     <ModalCloseButton />
                     <ModalBody>
                         <div>
-                            <Checkbox colorScheme="cyan" isChecked>
+                            <Checkbox colorScheme="teal" isChecked>
                                 Resize
                             </Checkbox>
                         </div>
                         <div>
-                            <Checkbox colorScheme="cyan" isChecked>
+                            <Checkbox colorScheme="teal" isChecked>
                                 Sort
                             </Checkbox>
                         </div>
                         <div>
-                            <Checkbox colorScheme="cyan" isChecked>
+                            <Checkbox colorScheme="teal" isChecked>
                                 Search
                             </Checkbox>
                         </div>
                         <div>
-                            <Checkbox colorScheme="cyan" isChecked>
+                            <Checkbox colorScheme="teal" isChecked>
                                 Filter
                             </Checkbox>
                         </div>
                         <div>
-                            <Checkbox colorScheme="cyan" isChecked>
+                            <Checkbox colorScheme="teal" isChecked>
                                 Select
                             </Checkbox>
                         </div>
                         <div>
-                            <Checkbox colorScheme="cyan" isChecked>
+                            <Checkbox colorScheme="teal" isChecked>
                                 Tree
                             </Checkbox>
                         </div>
                         <div>
-                            <Checkbox colorScheme="cyan" isChecked>
+                            <Checkbox colorScheme="teal" isChecked>
                                 Drawer on Edit
                             </Checkbox>
                         </div>
                         <div>
-                            <Checkbox colorScheme="cyan" isChecked>
+                            <Checkbox colorScheme="teal" isChecked>
                                 Pagination
                             </Checkbox>
                         </div>
@@ -349,7 +349,7 @@ export const DatasetsTable = () => {
 
             <HStack m={3}>
                 {/* <Button
-                    colorScheme="cyan"
+                    colorScheme="teal"
                     variant="outline"
                     onClick={() => setModalOpened(true)}>
                     Features?
@@ -361,7 +361,7 @@ export const DatasetsTable = () => {
                         children={<FaSearch style={{ color: '#4a5568' }} />}
                     />
                     <Input
-                        colorScheme='cyan'
+                        colorScheme='teal'
                         variant="outline"
                         placeholder="Search datasets"
                         value={search}
@@ -371,7 +371,7 @@ export const DatasetsTable = () => {
 
                 <Checkbox
                     style={{ whiteSpace: 'nowrap' }}
-                    colorScheme="cyan"
+                    colorScheme="teal"
                     isChecked={isHide}
                     onChange={(event) => setHide(event.target.checked)}
                 >
@@ -399,7 +399,7 @@ export const DatasetsTable = () => {
                 <IconButton
                     aria-label="previous page"
                     icon={<FaChevronLeft />}
-                    colorScheme="cyan"
+                    colorScheme="teal"
                     variant="ghost"
                     disabled={pagination.state.page === 0}
                     onClick={() => pagination.fns.onSetPage(pagination.state.page - 1)}
@@ -408,7 +408,7 @@ export const DatasetsTable = () => {
                 {pagination.state.getPages(modifiedNodes).map((_: any, index: React.Key | null | undefined) => (
                     <Button
                         key={index}
-                        colorScheme="cyan"
+                        colorScheme="teal"
                         variant={pagination.state.page === index ? 'solid' : 'ghost'}
                         onClick={() => pagination.fns.onSetPage(index as number)}
                     >
@@ -418,7 +418,7 @@ export const DatasetsTable = () => {
                 <IconButton
                     aria-label="next page"
                     icon={<FaChevronRight />}
-                    colorScheme="cyan"
+                    colorScheme="teal"
                     variant="ghost"
                     disabled={pagination.state.page + 1 === pagination.state.getTotalPages(data.nodes)}
                     onClick={() => pagination.fns.onSetPage(pagination.state.page + 1)}
@@ -447,7 +447,7 @@ export const DatasetsTable = () => {
                         <Button variant="outline" mr={3} onClick={handleCancel}>
                             Cancel
                         </Button>
-                        <Button onClick={handleSave} colorScheme="cyan">
+                        <Button onClick={handleSave} colorScheme="teal">
                             Save
                         </Button>
                     </DrawerFooter>

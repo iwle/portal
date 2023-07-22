@@ -12,15 +12,19 @@ import { SidebarContent } from '../components/Sidebar';
 
 export default function SidebarWithHeader({
     children,
+    selected
 }: {
     children: ReactNode;
+    selected: string;
 }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     return (
         <Box maxH="100%" bg={useColorModeValue('gray.100', 'gray.900')}>
             <SidebarContent
                 onClose={() => onClose}
-                display={{ base: 'none', md: 'block' }} />
+                display={{ base: 'none', md: 'block' }}
+                selected={selected}
+            />
             <Drawer
                 autoFocus={false}
                 isOpen={isOpen}
@@ -30,7 +34,7 @@ export default function SidebarWithHeader({
                 onOverlayClick={onClose}
                 size="full">
                 <DrawerContent>
-                    <SidebarContent onClose={onClose} />
+                    <SidebarContent selected={selected} onClose={onClose} />
 
                 </DrawerContent>
             </Drawer>
