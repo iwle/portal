@@ -46,6 +46,7 @@ import {
     FaChevronLeft,
 } from 'react-icons/fa';
 import { nodes } from '../../constants/Data';
+import { DatasetsTable } from './Datasets';
 
 
 const key = 'Showreel';
@@ -220,8 +221,9 @@ export const UsersTable = () => {
     let modifiedNodes = data.nodes;
 
     // search
-    modifiedNodes = modifiedNodes.filter((node) =>
-        node.name.toLowerCase().includes(search.toLowerCase()),
+    modifiedNodes = modifiedNodes.filter((node) => {
+        return node.name.toLowerCase().includes(search.toLowerCase())
+    }
     );
 
     // filter
@@ -231,7 +233,7 @@ export const UsersTable = () => {
 
     const COLUMNS = [
         {
-            label: 'Task',
+            label: 'Unit',
             renderCell: (item: { name: any; }) => item.name,
             resize,
             sort: { sortKey: 'TASK' },
@@ -256,7 +258,7 @@ export const UsersTable = () => {
             tree: true,
         },
         {
-            label: 'Deadline',
+            label: 'Updated on',
             renderCell: (item: { deadline: { toLocaleDateString: (arg0: string, arg1: { year: string; month: string; day: string; }) => any; }; }) =>
                 item.deadline.toLocaleDateString('en-US', {
                     year: 'numeric',
@@ -266,15 +268,23 @@ export const UsersTable = () => {
             resize,
             sort: { sortKey: 'DEADLINE' },
         },
-        { label: 'Type', renderCell: (item: { type: any; }) => item.type, resize, sort: { sortKey: 'TYPE' } },
+        // { label: 'Type', renderCell: (item: { type: any; }) => item.type, resize, sort: { sortKey: 'TYPE' } },
+        // {
+        //     label: 'Complete',
+        //     renderCell: (item: { isComplete: { toString: () => any; }; }) => item.isComplete.toString(),
+        //     resize,
+        //     sort: { sortKey: 'COMPLETE' },
+        // },
         {
-            label: 'Complete',
-            renderCell: (item: { isComplete: { toString: () => any; }; }) => item.isComplete.toString(),
+            label: 'Designation',
+            renderCell: ((item: { designation: string; }) => {
+                return item.designation
+            }),
             resize,
-            sort: { sortKey: 'COMPLETE' },
+            sort: { sortKey: 'DESIGNATION' }
         },
         {
-            label: 'Tasks',
+            label: 'Members',
             renderCell: (item: { nodes: string | any[]; id: React.SetStateAction<null>; }) => (
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span>{item.nodes?.length}</span>
@@ -289,63 +299,12 @@ export const UsersTable = () => {
                 </div>
             ),
             resize,
-            sort: { sortKey: 'TASKS' },
+            sort: { sortKey: 'MEMBERS' },
         },
     ];
 
     return (
         <>
-            <Modal isOpen={modalOpened} onClose={() => setModalOpened(false)}>
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Not all features included here, but we got ...</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        <div>
-                            <Checkbox colorScheme="teal" isChecked>
-                                Resize
-                            </Checkbox>
-                        </div>
-                        <div>
-                            <Checkbox colorScheme="teal" isChecked>
-                                Sort
-                            </Checkbox>
-                        </div>
-                        <div>
-                            <Checkbox colorScheme="teal" isChecked>
-                                Search
-                            </Checkbox>
-                        </div>
-                        <div>
-                            <Checkbox colorScheme="teal" isChecked>
-                                Filter
-                            </Checkbox>
-                        </div>
-                        <div>
-                            <Checkbox colorScheme="teal" isChecked>
-                                Select
-                            </Checkbox>
-                        </div>
-                        <div>
-                            <Checkbox colorScheme="teal" isChecked>
-                                Tree
-                            </Checkbox>
-                        </div>
-                        <div>
-                            <Checkbox colorScheme="teal" isChecked>
-                                Drawer on Edit
-                            </Checkbox>
-                        </div>
-                        <div>
-                            <Checkbox colorScheme="teal" isChecked>
-                                Pagination
-                            </Checkbox>
-                        </div>
-                    </ModalBody>
-                </ModalContent>
-            </Modal>
-
-            {/* Form */}
 
             <HStack m={3}>
                 {/* <Button
@@ -369,14 +328,14 @@ export const UsersTable = () => {
                     />
                 </InputGroup>
 
-                <Checkbox
+                {/* <Checkbox
                     style={{ whiteSpace: 'nowrap' }}
                     colorScheme="teal"
                     isChecked={isHide}
                     onChange={(event) => setHide(event.target.checked)}
                 >
                     Hide Complete
-                </Checkbox>
+                </Checkbox> */}
             </HStack>
 
             {/* Table */}
@@ -425,22 +384,14 @@ export const UsersTable = () => {
                 />
             </HStack>
 
-            <Drawer isOpen={drawerId ? drawerId : false} onClose={handleCancel} placement="right">
+            <Drawer isOpen={drawerId ? drawerId : false} onClose={handleCancel} placement="top">
                 <DrawerOverlay />
                 <DrawerContent>
                     <DrawerCloseButton />
-                    <DrawerHeader>Create your account</DrawerHeader>
+                    <DrawerHeader>Edit Dataset Access for {fromTreeToList(data.nodes).find((node) => node.id === drawerId)?.name} ({fromTreeToList(data.nodes).find((node) => node.id === drawerId)?.type}) </DrawerHeader>
 
                     <DrawerBody>
-                        <Text>Name: </Text>
-                        <Input
-                            autoFocus
-                            value={
-                                edited || fromTreeToList(data.nodes).find((node) => node.id === drawerId)?.name
-                            }
-                            onChange={handleEdit}
-                            data-autofocus
-                        />
+                        <DatasetsTable />
                     </DrawerBody>
 
                     <DrawerFooter>

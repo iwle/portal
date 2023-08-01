@@ -38,14 +38,14 @@ import {
     DrawerCloseButton,
 } from '@chakra-ui/react';
 import {
-    FaPen,
+    FaArrowRight,
     FaSearch,
     FaChevronRight,
     FaChevronDown,
     FaChevronUp,
     FaChevronLeft,
 } from 'react-icons/fa';
-import { nodes } from '../../constants/Data';
+import { nodes } from '../../constants/DatasetsData';
 
 
 const key = 'Showreel';
@@ -237,20 +237,22 @@ export const DatasetsTable = () => {
             sort: { sortKey: 'TASK' },
             select: {
                 renderHeaderCellSelect: () => (
-                    <Checkbox
-                        colorScheme="teal"
-                        isChecked={select.state.all}
-                        isIndeterminate={!select.state.all && !select.state.none}
-                        onChange={select.fns.onToggleAll}
-                    />
+                    <></>
+                    // <Checkbox
+                    //     colorScheme="teal"
+                    //     isChecked={select.state.all}
+                    //     isIndeterminate={!select.state.all && !select.state.none}
+                    //     onChange={select.fns.onToggleAll}
+                    // />
                 ),
                 renderCellSelect: (item: { id: Identifier; }) => (
-                    <Checkbox
-                        colorScheme="teal"
-                        style={{ backgroundColor: '#ffffff' }}
-                        isChecked={select.state.ids.includes(item.id)}
-                        onChange={() => select.fns.onToggleById(item.id)}
-                    />
+                    <></>
+                    // <Checkbox
+                    //     colorScheme="teal"
+                    //     style={{ backgroundColor: '#ffffff' }}
+                    //     isChecked={select.state.ids.includes(item.id)}
+                    //     onChange={() => select.fns.onToggleById(item.id)}
+                    // />
                 ),
             },
             tree: true,
@@ -268,19 +270,19 @@ export const DatasetsTable = () => {
         },
         { label: 'Type', renderCell: (item: { type: any; }) => item.type, resize, sort: { sortKey: 'TYPE' } },
         {
-            label: 'Complete',
+            label: 'Granted?',
             renderCell: (item: { isComplete: { toString: () => any; }; }) => item.isComplete.toString(),
             resize,
             sort: { sortKey: 'COMPLETE' },
         },
         {
-            label: 'Tasks',
+            label: 'Tables',
             renderCell: (item: { nodes: string | any[]; id: React.SetStateAction<null>; }) => (
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span>{item.nodes?.length}</span>
                     <IconButton
                         aria-label="edit"
-                        icon={<FaPen />}
+                        icon={<FaArrowRight />}
                         size="xs"
                         variant="ghost"
                         colorScheme="teal"
@@ -375,7 +377,7 @@ export const DatasetsTable = () => {
                     isChecked={isHide}
                     onChange={(event) => setHide(event.target.checked)}
                 >
-                    Hide Complete
+                    Hide granted
                 </Checkbox>
             </HStack>
 
@@ -429,10 +431,11 @@ export const DatasetsTable = () => {
                 <DrawerOverlay />
                 <DrawerContent>
                     <DrawerCloseButton />
-                    <DrawerHeader>Create your account</DrawerHeader>
+                    <DrawerHeader>View Details of {fromTreeToList(data.nodes).find((node) => node.id === drawerId)?.name}</DrawerHeader>
 
                     <DrawerBody>
-                        <Text>Name: </Text>
+                        Testing...
+                        {/* <Text>Name: </Text>
                         <Input
                             autoFocus
                             value={
@@ -440,7 +443,7 @@ export const DatasetsTable = () => {
                             }
                             onChange={handleEdit}
                             data-autofocus
-                        />
+                        /> */}
                     </DrawerBody>
 
                     <DrawerFooter>
